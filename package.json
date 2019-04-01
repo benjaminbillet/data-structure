@@ -1,0 +1,17 @@
+{
+  "name": "data-structure",
+  "version": "1.0.0",
+  "scripts": {
+    "execute": "babel-node",
+    "transpile": "babel . --ignore ./node_modules,./generated --out-dir ./generated"
+  },
+  "devDependencies": {
+    "babel-cli": "6.26.0",
+    "babel-eslint": "10.0.1",
+    "eslint": "5.16.0",
+    "eslint-config-google": "0.12.0",
+    "babel-preset-env": "1.7.0"
+  },
+  "dependencies": {
+  }
+}
