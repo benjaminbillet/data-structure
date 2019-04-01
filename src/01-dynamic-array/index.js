@@ -15,7 +15,7 @@ export default class DynamicArray {
 
   // replace element at index "location" by a new element
   // takes O(1) operations
-  set(item, location) {
+  set(location, item) {
     assert(location >= 0 && location < this.logicalSize);
     this.array[location] = item;
   }
@@ -42,7 +42,7 @@ export default class DynamicArray {
   // - best case is O(1) operations: add an element at the end, when the array is not full
   // - worst case is O(n) operations: add an element at the beginning of the array, when the array is full
   // in average, n/2 elements needs to be shifted, this operation is thus O(n) in average.
-  insert(item, location) {
+  insert(location, item) {
     assert(location >= 0 && location < this.logicalSize);
     this._resizeIfNeeded();
 
@@ -108,20 +108,3 @@ export default class DynamicArray {
     }
   }
 }
-
-const myArray = new DynamicArray(2);
-console.log(myArray.array); // [undefined, undefined]
-
-myArray.add(1);
-myArray.add(2);
-console.log(myArray.array, myArray.getSize()); // [1, 2], 2
-
-myArray.add(3); // the array will double its size
-console.log(myArray.array, myArray.getSize()); // [1, 2, 3, undefined], 3
-
-myArray.insert(4, 0);
-console.log(myArray.array, myArray.getSize()); // [4, 1, 2, 3], 4
-
-myArray.remove(0);
-console.log(myArray.array, myArray.getSize()); // [1, 2, 3, 3], 3
-

@@ -3,15 +3,17 @@
   "version": "1.0.0",
   "scripts": {
     "execute": "babel-node",
-    "transpile": "babel . --ignore ./node_modules,./generated --out-dir ./generated"
+    "transpile": "babel . --ignore ./node_modules,./generated --out-dir ./generated",
+    "test": "jest --passWithNoTests"
   },
   "devDependencies": {
     "babel-cli": "6.26.0",
     "babel-eslint": "10.0.1",
+    "babel-jest": "23.6.0",
+    "babel-preset-env": "1.7.0",
     "eslint": "5.16.0",
     "eslint-config-google": "0.12.0",
-    "babel-preset-env": "1.7.0"
+    "jest": "23.6.0"
   },
-  "dependencies": {
-  }
+  "dependencies": {}
 }

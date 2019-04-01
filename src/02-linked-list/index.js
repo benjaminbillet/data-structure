@@ -20,7 +20,7 @@ export default class LinkedList {
   // replace element at index "location" by a new element. Takes O(n) operations:
   // - O(1) if index = 0 or index = list size - 1 (best case)
   // - O(n) otherwise (worst case)
-  set(item, location) {
+  set(location, item) {
     assert(location >= 0 && location < this.size);
 
     if (location === this.size - 1) {
@@ -72,7 +72,7 @@ export default class LinkedList {
   // insert a new item at a specific location. Takes O(n) operations:
   // - O(1) if index = 0 (best case)
   // - O(n) otherwise (worst case)
-  insert(item, location) {
+  insert(location, item) {
     assert(location >= 0 && location < this.size);
 
     const newItem = this._createItem(item);
@@ -149,20 +149,3 @@ export default class LinkedList {
     return { value, next: null };
   }
 }
-
-const myList = new LinkedList();
-console.log(myList.head, myList.tail); // null, null
-
-myList.add(1);
-myList.add(2);
-console.log(myList.get(0), myList.get(1), myList.getSize()); // 1, 2, 2
-
-myList.insert(3, 1);
-console.log(myList.get(0), myList.get(1), myList.get(2), myList.getSize()); // 1, 3, 2, 3
-
-myList.set(4, 0);
-console.log(myList.get(0), myList.get(1), myList.get(2), myList.getSize()); // 4, 3, 2, 3
-
-myList.remove(1);
-console.log(myList.get(0), myList.get(1), myList.getSize()); // 4, 2, 2
-
