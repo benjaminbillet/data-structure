@@ -5,7 +5,43 @@ The data structure are implemented in Javascript. Of course, Javascript being a 
 The point here being to reimplement such data structure, we will take the following assumptions:
 
 - we will consider arrays as fixed-size arrays (i.e., a fixed-size sequence of contiguous elements in memory).
-- we will consider associative arrays as fixed-size data structures.
+- we will consider associative arrays as data structures containing a fixed, a-priori known, number of fields.
+
+# Primitives of data structures
+
+Queues (First In First Out queue)
+- add/enqueue/push: insert something at the beginning of the queue
+- remove/dequeue/pop: remove and retrieve the last element of the queue
+One variant of queues are priority queues, where the remove operation always remove the smallest or biggest element
+
+Stack (Last In First Out queue)
+- add/stack/push: insert something at the beginning of the stack
+- remove/unstack/pop: remove and retrieve the first element of the stack
+
+Deque (Double Ended QUEue): a queue with two sides (both FIFO and LIFO)
+- addFirst
+- removeFirst
+- addLast
+- removeLast
+
+List: linear sequence
+- add: add a value at a given index
+- remove: remove a value at a given index
+- get: get the value at a given index
+- set: set the value at a given index
+- size: get the length of the list
+
+Map: association table between keys and values
+- add: add a key/value pair
+- remove: given a key, remove a key/value pair
+- get: give a key, retrieve the value
+- size: get the size of the set
+
+Sets: group of unique elements
+- add: add an element to the set
+- remove: remove an element of the set
+- contains: check if an element exists in the set
+- size: get the size of the set
 
 
 # A word about complexity: Big O, Big Ω and Big θ
