@@ -86,7 +86,7 @@ export default class DynamicArray {
     if (this.logicalSize === this.physicalSize) {
       // the array is full, we need to create a new bigger array
       // and copy all the existing elements to the new array
-      // it takes O(n) operations
+      // it takes O(n) operations every n items, thus in average resizing is O(n/n) = O(1)
 
       this.physicalSize = this.physicalSize * 2; // the new array will be twice the size
       const newArray = new Array(this.physicalSize);
