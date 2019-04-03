@@ -30,3 +30,23 @@ export const hashString = (str) => {
   }
   return h;
 };
+
+// inspired from java string compareTo
+export const stringCompare = (str1, str2) => {
+  const limit = Math.min(str1.length, str2.length);
+
+  for (let i = 0; i < limit; i++) {
+    const c1 = str1.charCodeAt(i);
+    const c2 = str2.charCodeAt(i);
+    if (c1 != c2) {
+      return c1 - c2;
+    }
+  }
+
+  return str1.length - str2.length;
+};
+
+export const intCompare = (int1, int2) => {
+  return int1 - int2;
+};
+

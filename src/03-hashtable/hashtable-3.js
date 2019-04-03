@@ -8,7 +8,7 @@ http://www.cs.rmit.edu.au/online/blackboard/chapter/05/documents/contribute/chap
 */
 
 import assert from 'assert';
-import LinkedList from '../02-linked-list';
+import LinkedList from '../02-linked-list/linked-list';
 
 export default class Hashtable {
   constructor(hashFunction, initialCapacity = 32, loadFactor = 0.75) {
@@ -43,7 +43,7 @@ export default class Hashtable {
 
     if (bucket.getSize() === 0) {
       // the bucket is empty, just add the kv pair
-      bucket.add(kv);
+      bucket.add(bucket.getSize(), kv);
       this.size = this.size + 1;
     } else {
       // look for an item with the same key in the bucket
@@ -55,7 +55,7 @@ export default class Hashtable {
         }
       }
       if (index < 0) { // add kv pair
-        bucket.add(kv);
+        bucket.add(bucket.getSize(), kv);
         this.size = this.size + 1;
       } else { // replace kv pair
         bucket.set(index, kv);
