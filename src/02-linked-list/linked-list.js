@@ -66,6 +66,7 @@ export default class LinkedList {
       newItem.next = this.head;
       this.head = newItem;
     } else if (index === this.size) {
+      // by keeping a reference to the tail, we optimize this common case
       this.tail.next = newItem;
       this.tail = newItem;
     } else {
