@@ -3,8 +3,8 @@ Merge sort is a "divide and conquer" recursive algorithm: it divides the list in
 
 The following image illustrates the complexity of the algorithm: https://i.stack.imgur.com/rPhxO.png
 For each level of the tree, n elements are analyzed, making the complexity O(kn), with k the depth of the tree.
-The depth of the tree is log²(n).
-In asymptotic notation, the logarithm base is not important: you can transform a base to another by using a constant factor: log_b(n) = log_c(n) * 1 / log_c(b)
+The depth of the tree is log₂(n).
+In asymptotic notation, the logarithm base is not important: you can transform a base to another by using a constant factor: logₛ(n) = logₜ(n) * 1 / logₜ(s)
 Thus, the worst, best and average complexity of the merge sort is O(nlog(n)).
 
 This is also a stable sort.
