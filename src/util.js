@@ -31,7 +31,7 @@ export const hashString = (str) => {
   return h;
 };
 
-// inspired from java string compareTo
+// a string comparator, inspired from java string compareTo
 export const stringCompare = (str1, str2) => {
   const limit = Math.min(str1.length, str2.length);
 
@@ -46,7 +46,15 @@ export const stringCompare = (str1, str2) => {
   return str1.length - str2.length;
 };
 
+// an integer comparator
 export const intCompare = (int1, int2) => {
   return int1 - int2;
+};
+
+// test if "median" is the median of the set {median, val1, val2}
+export const isThreeMedian = (comparator, median, val1, val2) => {
+  const case1 = comparator(val1, median) <= 0 && comparator(median, val2) <= 0;
+  const case2 = comparator(val2, median) <= 0 && comparator(median, val1) <= 0;
+  return case1 || case2;
 };
 
