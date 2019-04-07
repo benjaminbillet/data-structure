@@ -36,7 +36,7 @@ export default class LinkedList {
     assert(this.size > 0);
 
     const value = this.head.value;
-    if (this.head == this.tail) {
+    if (this.head === this.tail) {
       this.head = null;
       this.tail = null;
     } else {

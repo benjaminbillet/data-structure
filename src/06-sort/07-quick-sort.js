@@ -42,7 +42,7 @@ const partition = (list, comparator, left, right, pivot) => {
   let rightIndex = right;
 
   let sorted = false;
-  while (sorted == false) {
+  while (sorted === false) {
     // iterate until we find an element greater than the pivot
     do {
       leftIndex++;

@@ -18,9 +18,27 @@ A binary tree is called a "binary search tree" (BST) when, for all node N:
 
 A binary tree is said "complete" or "well balanced" if all nodes except the leaves have two childs
 
+TREE TRAVERSAL
+Iterators for tree are usually called "traversal", the well-know tree traversal are:
+- breadth first search: the tree is traverse layers by layers.
+  If we take the above example, the traversal would be: 50, 20, 40, 5, 25, 10
+- depth first search: the tree is traverse by paths
+  If we take the above example, the traversal would be: 50, 20, 5, 40, 25, 10, which correspond to the paths: 50, 20, 5; 50, 40, 25 and 50, 40, 10
+
+SORTED SETS
+A binary tree can be used to implement sets and sorted sets data structures.
+
+To iterate over the sorted set in a "in-order" way (from smallest to biggest element), we can browse recursively the left subtree then the righ subtree
+Given the binary search tree property, the traversal will go from smallest (leftest node) to biggest (rightest node).
+Note: going from the rightest to the leftest is a "reverse-order" traversal.
+
+It is also possible to support "multisets" (= sets with duplicates) by keeping a count of items at each node, a node being actually deleted only when the counter becomes 0
+
+
 LINKS
 https://www.tutorialspoint.com/data_structures_algorithms/tree_data_structure.htm
 https://opendatastructures.org/versions/edition-0.1g/ods-java/6_2_BinarySearchTree_Unbala.html
+https://www.techiedelight.com/inorder-tree-traversal-iterative-recursive
 */
 
 export default class BinarySearchTree {

@@ -111,7 +111,9 @@ export const testBinaryTree = (name, supplier) => {
     expect(tree.getSize()).toBe(8);
 
     for (let i = 0; i < 8; i++) {
-      tree.removeByValue(i);
+      const removed = tree.removeByValue(i);
+      expect(tree.getSize()).toBe(8 - 1 - i);
+      expect(removed).toBe(i);
     }
 
     expect(tree.getSize()).toBe(0);
@@ -126,7 +128,9 @@ export const testBinaryTree = (name, supplier) => {
     expect(tree.getSize()).toBe(3);
 
     for (let i = 0; i < 3; i++) {
-      tree.removeByValue(i);
+      const removed = tree.removeByValue(i);
+      expect(tree.getSize()).toBe(3 - 1 - i);
+      expect(removed).toBe(i);
     }
 
     expect(tree.getSize()).toBe(0);
