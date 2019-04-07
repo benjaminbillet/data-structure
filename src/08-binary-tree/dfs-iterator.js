@@ -2,10 +2,10 @@ import LinkedStack from '../02-linked-list/stack';
 
 export default class DfsBinaryTreeIterator {
   constructor(binaryTree) {
-    this.binaryTree = binaryTree;
+    this.tree = binaryTree;
     this.stack = new LinkedStack();
 
-    const root = this.binaryTree.getRoot();
+    const root = this.tree.getRoot();
     if (root!= null) {
       this.stack.push(root);
     }
@@ -17,12 +17,12 @@ export default class DfsBinaryTreeIterator {
 
   next() {
     const node = this.stack.pop();
-    if (node.right != null) {
-      this.stack.push(node.right);
+    if (this.tree.right(node) != null) {
+      this.stack.push(this.tree.right(node));
     }
-    if (node.left != null) {
-      this.stack.push(node.left);
+    if (this.tree.left(node) != null) {
+      this.stack.push(this.tree.left(node));
     }
-    return node.value;
+    return this.tree.value(node);
   }
 };

@@ -15,21 +15,24 @@ export const testBinaryTree = (name, supplier) => {
 
   test(`add one value: ${name}`, () => {
     const tree = supplier(stringCompare);
-    tree.add('value');
+    const node = tree.add('value');
     expect(tree.getSize()).toBe(1);
+    expect(tree.value(node)).toBe('value');
     expect(tree.search('value')).not.toBeNull();
     expect(tree.contains('value')).toBeTruthy();
   });
 
   test(`add the same value twice: ${name}`, () => {
     const tree = supplier(stringCompare);
-    tree.add('value');
+    const node1 = tree.add('value');
     expect(tree.getSize()).toBe(1);
+    expect(tree.value(node1)).toBe('value');
     expect(tree.search('value')).not.toBeNull();
     expect(tree.contains('value')).toBeTruthy();
 
-    tree.add('value');
+    const node2 = tree.add('value');
     expect(tree.getSize()).toBe(1);
+    expect(tree.value(node2)).toBe('value');
     expect(tree.search('value')).not.toBeNull();
     expect(tree.contains('value')).toBeTruthy();
   });

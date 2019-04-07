@@ -2,10 +2,10 @@ import LinkedQueue from '../02-linked-list/queue';
 
 export default class BfsBinaryTreeIterator {
   constructor(binaryTree) {
-    this.binaryTree = binaryTree;
+    this.tree = binaryTree;
     this.queue = new LinkedQueue();
 
-    const root = this.binaryTree.getRoot();
+    const root = this.tree.getRoot();
     if (root!= null) {
       this.queue.push(root);
     }
@@ -17,13 +17,13 @@ export default class BfsBinaryTreeIterator {
 
   next() {
     const node = this.queue.pop();
-    if (node.left != null) {
-      this.queue.push(node.left);
+    if (this.tree.left(node) != null) {
+      this.queue.push(this.tree.left(node));
     }
-    if (node.right != null) {
-      this.queue.push(node.right);
+    if (this.tree.right(node) != null) {
+      this.queue.push(this.tree.right(node));
     }
-    return node.value;
+    return this.tree.value(node);
   }
 };
 

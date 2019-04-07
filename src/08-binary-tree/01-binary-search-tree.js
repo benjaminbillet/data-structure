@@ -46,6 +46,10 @@ export default class BinarySearchTree {
     return node.parent;
   }
 
+  value(node) {
+    return node.value;
+  }
+
   sibling(node) {
     if (node.parent == null) {
       return null; // no sibling if no parent

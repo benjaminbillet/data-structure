@@ -1,28 +1,28 @@
 // a simple function that prints a binary tree
-export const printNode = (root, tab = '') => {
-  if (root == null || (root.left == null && root.right == null)) {
+export const printNode = (tree, node, tab = '') => {
+  if (node == null || (tree.left(node) == null && tree.right(node) == null)) {
     return;
   }
 
   if (tab === '') {
-    console.log(root.value);
+    console.log(tree.value(node));
   }
 
-  if (root.left != null) {
-    console.log(tab + '├── ' + root.left.value + ' (left)');
+  if (tree.left(node) != null) {
+    console.log(tab + '├── ' + tree.value(tree.left(node)) + ' (left)');
   } else {
     console.log(tab + '├── null (left)');
   }
-  printNode(root.left, tab + '│   ');
+  printNode(tree, tree.left(node), tab + '│   ');
 
-  if (root.right != null) {
-    console.log(tab + '└── ' + root.right.value + ' (right)');
+  if (tree.right(node) != null) {
+    console.log(tab + '└── ' + tree.value(tree.right(node)) + ' (right)');
   } else {
     console.log(tab + '└── null (right)');
   }
-  printNode(root.right, tab + '    ');
+  printNode(tree, tree.right(node), tab + '    ');
 };
 
 export const printTree = (tree) => {
-  printNode(tree.getRoot());
+  printNode(tree, tree.getRoot());
 };
