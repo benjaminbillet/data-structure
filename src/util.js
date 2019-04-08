@@ -58,3 +58,18 @@ export const isThreeMedian = (comparator, median, val1, val2) => {
   return case1 || case2;
 };
 
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/clz32
+export const countTrailingOnes = (integer) => {
+  integer = ~integer; // complement bits
+
+  // fill all the higher bits after the first one
+  integer |= integer << 16;
+  integer |= integer << 8;
+  integer |= integer << 4;
+  integer |= integer << 2;
+  integer |= integer << 1;
+
+  // inverse the bits, count the number of trailing zeroes
+  return 32 - Math.clz32(~integer);
+};
+
