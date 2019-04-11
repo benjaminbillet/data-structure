@@ -1,6 +1,6 @@
 /*
 A red-black tree is a self-balancing BST. After insertion or deletion, the tree is optimally balanced,
-ensuring that all operations (search, insert and delete) has a worst case time complexity of O(log(n)) (depth of the tree is always log(n))
+ensuring that all operations (search, insert and remove) has a worst case time complexity of O(log(n)) (depth of the tree is always log(n))
 
 In a RB-Tree, all nodes are tagged with a color, RED or BLACK, following these rules:
 1. root of the tree is always BLACK
@@ -44,7 +44,7 @@ export default class RedBlackTree extends BinarySearchTree {
   removeByNode(node) {
     // there is three case for removing a node N:
     // - N has no child, we can simply remove it
-    // - N has one child, we need to attach it to the parent of the deleted node
+    // - N has one child, we need to attach it to the parent of the removed node
     // - N has two child, we need to find a node N' with no child that can replace N.
     //   To maintain the BST property, we can take the smallest value greater than N,
     //   which is fortunately the "leftest" value of the right subtree of N.
@@ -54,7 +54,7 @@ export default class RedBlackTree extends BinarySearchTree {
     if (node.left == null && node.right == null) { // case 1
       // the node has no child; if the node is BLACK, removing it will violate property 3
       if (node.color === BLACK) {
-        this._repairDelete(node);
+        this._repairRemove(node);
       }
       this._splice(node); // node has one or no child, splice it
     } else if (node.left == null || node.right == null) { // case 2
@@ -62,7 +62,7 @@ export default class RedBlackTree extends BinarySearchTree {
 
       // the node is BLACK; if we replace it by a BLACK children, we violate property 3
       if (spliced.color === BLACK && node.color === BLACK) {
-        this._repairDelete(spliced);
+        this._repairRemove(spliced);
       } else {
         // - if we have a BLACK node and a RED child, removing the BLACK node will violate property 3
         // thus we can simply recolor the child as BLACK
@@ -76,9 +76,9 @@ export default class RedBlackTree extends BinarySearchTree {
         leftest = leftest.left;
       }
 
-      // replace the node to delete by the leftest node
+      // replace the node to remove by the leftest node
       node.value = leftest.value;
-      // delete the leftest node
+      // remove the leftest node
       this.removeByNode(leftest);
     }
     return value;
@@ -110,6 +110,8 @@ export default class RedBlackTree extends BinarySearchTree {
 
     right.left = node;
     node.parent = right;
+
+    return right;
   }
 
   // rotate the subtree(node) to the right, e.g.:
@@ -138,6 +140,8 @@ export default class RedBlackTree extends BinarySearchTree {
 
     left.right = node;
     node.parent = left;
+
+    return left;
   }
 
   _repairInsert(node) {
@@ -194,7 +198,7 @@ export default class RedBlackTree extends BinarySearchTree {
     }
   }
 
-  _repairDelete(node) {
+  _repairRemove(node) {
     if (node.parent == null) { // root
       return; // nothing to repair
     }
@@ -203,7 +207,7 @@ export default class RedBlackTree extends BinarySearchTree {
     const parent = node.parent;
     if (sibling == null) {
       // no sibling, we fix the violation recursively
-      this._repairDelete(parent);
+      this._repairRemove(parent);
     } else {
       if (sibling.color === RED) {
         // sibling(N) is RED, we recolor it BLACK and its parent RED
@@ -218,7 +222,7 @@ export default class RedBlackTree extends BinarySearchTree {
           this._rotateLeft(parent);
         }
         // perform violation fixing again, after the rotation
-        this._repairDelete(node);
+        this._repairRemove(node);
       } else {
         // sibling(N) is BLACK
         const hasRedChild = (sibling.left != null && sibling.left.color === RED) || (sibling.right != null && sibling.right.color === RED);
@@ -261,7 +265,7 @@ export default class RedBlackTree extends BinarySearchTree {
           sibling.color = RED;
           if (parent.color === BLACK) {
             // the parent is BLACK, we fix the violation recursively
-            this._repairDelete(parent);
+            this._repairRemove(parent);
           } else {
             // the parent is RED, we recolor it to avoid violating property 2
             parent.color = BLACK;

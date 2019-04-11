@@ -32,7 +32,7 @@ To iterate over the sorted set in a "in-order" way (from smallest to biggest ele
 Given the binary search tree property, the traversal will go from smallest (leftest node) to biggest (rightest node).
 Note: going from the rightest to the leftest is a "reverse-order" traversal.
 
-It is also possible to support "multisets" (= sets with duplicates) by keeping a count of items at each node, a node being actually deleted only when the counter becomes 0
+It is also possible to support "multisets" (= sets with duplicates) by keeping a count of items at each node, a node being actually removed only when the counter becomes 0
 
 
 LINKS
@@ -157,7 +157,7 @@ export default class BinarySearchTree {
   removeByNode(node) {
     // there is three case for removing a node N:
     // - N has no child, we can simply remove it
-    // - N has one child, we need to attach it to the parent of the deleted node
+    // - N has one child, we need to attach it to the parent of the removed node
     // - N has two child, we need to find a node N' with no child that can replace N.
     //   To maintain the BST property, we can take the smallest value greater than N,
     //   which is fortunately the "leftest" value of the right subtree of N.
@@ -173,7 +173,7 @@ export default class BinarySearchTree {
         leftest = leftest.left;
       }
 
-      // replace the node to delete by the leftest node
+      // replace the node to remove by the leftest node
       node.value = leftest.value;
       // splice the leftest node
       this._splice(leftest);
@@ -207,7 +207,7 @@ export default class BinarySearchTree {
 
     let parent = null;
     if (node.parent == null) {
-      // the node to delete is the root node, we just replace it with the single child
+      // the node to remove is the root node, we just replace it with the single child
       this.root = child;
       parent = null;
     } else {

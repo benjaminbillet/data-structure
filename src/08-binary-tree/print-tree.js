@@ -1,6 +1,12 @@
 // a simple function that prints a binary tree
 export const printNode = (tree, node, tab = '') => {
-  if (node == null || (tree.left(node) == null && tree.right(node) == null)) {
+  if (node == null) {
+    return;
+  }
+  if (tree.left(node) == null && tree.right(node) == null) {
+    if (node.parent == null) {
+      console.log(tree.value(node));
+    }
     return;
   }
 

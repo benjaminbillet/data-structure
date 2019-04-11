@@ -36,8 +36,8 @@ export const stringCompare = (str1, str2) => {
   const limit = Math.min(str1.length, str2.length);
 
   for (let i = 0; i < limit; i++) {
-    const c1 = str1.charCodeAt(i);
-    const c2 = str2.charCodeAt(i);
+    const c1 = str1.codePointAt(i);
+    const c2 = str2.codePointAt(i);
     if (c1 != c2) {
       return c1 - c2;
     }
@@ -73,3 +73,12 @@ export const countTrailingOnes = (integer) => {
   return 32 - Math.clz32(~integer);
 };
 
+export const shuffleArray = (array) => {
+  for (let i = 0; i < array.length; i++) {
+    const randomIndex = Math.trunc(i + Math.random() * (array.length - i));
+    const tmp = array[i];
+    array[i] = array[randomIndex];
+    array[randomIndex] = tmp;
+  }
+  return array;
+};

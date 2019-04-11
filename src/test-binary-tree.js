@@ -3,6 +3,7 @@ Generic tests for binary trees
 */
 
 import { stringCompare, intCompare } from './util';
+import LinkedStack from './02-linked-list/stack';
 
 export const testBinaryTree = (name, supplier) => {
   test(`empty tree: ${name}`, () => {
@@ -145,3 +146,42 @@ const initTree = (supplier, nb = 8) => {
   return tree;
 };
 
+// a simple DFS for measuring the min and max height of the tree
+export const getTreeHeight = (tree) => {
+  const stack = new LinkedStack();
+
+  const root = tree.getRoot();
+  if (root!= null) {
+    stack.push(root);
+  }
+
+  let minHeight = Number.MAX_SAFE_INTEGER;
+  let maxHeight = Number.MIN_SAFE_INTEGER;
+
+  while (stack.getSize() > 0) {
+    const node = stack.pop();
+    if (tree.right(node) != null) {
+      stack.push(tree.right(node));
+    }
+    if (tree.left(node) != null) {
+      stack.push(tree.left(node));
+    }
+
+    if (node != null && tree.left(node) == null && tree.right(node) == null) {
+      const height = measureHeight(node);
+      minHeight = Math.min(minHeight, height);
+      maxHeight = Math.max(maxHeight, height);
+    }
+  }
+
+  return { minHeight, maxHeight };
+};
+
+const measureHeight = (node) => {
+  let height = 0;
+  while (node.parent != null) {
+    height = height + 1;
+    node = node.parent;
+  }
+  return height;
+};
