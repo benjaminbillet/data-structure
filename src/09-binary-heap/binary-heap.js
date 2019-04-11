@@ -92,11 +92,11 @@ export default class BinaryHeap {
     assert(this.value(index) != null);
 
     const parentIdx = this.parent(index);
-    const deleted = this.array[index];
+    const removed = this.array[index];
 
     this.logicalSize = this.logicalSize - 1;
 
-    // for ensuring complete binary tree property, replace deleted node with the rightmost leaf
+    // for ensuring complete binary tree property, replace removed node with the rightmost leaf
     this.array[index] = this.array[this.logicalSize];
     this.array[this.logicalSize] = null;
 
@@ -109,7 +109,7 @@ export default class BinaryHeap {
       this._heapUp(index);
     }
 
-    return deleted;
+    return removed;
   }
 
   getSize() {

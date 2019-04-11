@@ -74,7 +74,7 @@ export default class Hashtable {
       return null;
     }
 
-    // look for an item with the same key in the bucket and delete it
+    // look for an item with the same key in the bucket and remove it
     for (let i = 0; i < bucket.getSize(); i++) {
       const kv = bucket.get(i);
       if (kv.key === key) {

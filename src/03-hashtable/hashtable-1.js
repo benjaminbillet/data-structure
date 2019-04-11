@@ -15,10 +15,10 @@ If the hashtable become too loaded (e.g., 75% full), we create a bigger array an
 
 DELETION PROBLEM
 With open addressing, deletion can be complex given that creating empty cells will conflict with the search procedure described before.
-In this implementation, we use "tombstones". Instead of deleting elements, we only mark them as deleted.
+In this implementation, we use "tombstones". Instead of deleting elements, we only mark them as removed.
 - when inserting data, tombstones will be considered like empty cells
 - when searching a key, tombstones will be considered as non-empty cells.
-As you may imagine, this has an impact on the search performance, requiring us to rehash the whole table when the number of deleted items grows
+As you may imagine, this has an impact on the search performance, requiring us to rehash the whole table when the number of removed items grows
 
 HASHING
 The hash function is a very important concept of the hash table.
@@ -63,7 +63,7 @@ export default class Hashtable {
     // this is a circular search (we increment i modulo the number of cells)
     for (let i = cellIdx; i < cellIdx + this.nbCells; i = (i + 1) % this.nbCells) {
       const cell = this.cells[i];
-      if (cell == null || cell.deleted === true) {
+      if (cell == null || cell.removed === true) {
         // we found an empty slot, we put our key/value here
         this.cells[i] = kv;
         this.size = this.size + 1;
@@ -93,8 +93,8 @@ export default class Hashtable {
       const cell = this.cells[i];
       if (cell == null) {
         return null; // not found
-      } else if (cell.deleted !== true && cell.key === key) {
-        cell.deleted = true; // mark the item as deleted
+      } else if (cell.removed !== true && cell.key === key) {
+        cell.removed = true; // mark the item as removed
         this.size = this.size - 1;
         return cell.value;
       }
@@ -115,7 +115,7 @@ export default class Hashtable {
       const cell = this.cells[i % this.nbCells];
       if (cell == null) {
         return null; // not found
-      } else if (cell.deleted !== true && cell.key === key) {
+      } else if (cell.removed !== true && cell.key === key) {
         return cell.value;
       }
     }
@@ -143,7 +143,7 @@ export default class Hashtable {
       // we rehash all elements in the new table
       for (let i = 0; i < oldNbCells; i++) {
         const cell = oldCells[i];
-        if (cell != null && cell.deleted !== true) {
+        if (cell != null && cell.removed !== true) {
           this.add(cell.key, cell.value);
         }
       }
@@ -151,7 +151,7 @@ export default class Hashtable {
   }
 
   _createItem(key, value) {
-    return { key, value, deleted: false };
+    return { key, value, removed: false };
   }
 }
 
