@@ -5,7 +5,7 @@ import BfsGraphIterator from '../bfs-iterator';
 
 testGraph('AdjacencyList', (nbNodes) => new AdjacencyList(nbNodes));
 
-test(`breadth-first-search: ${name}`, () => {
+test('breadth-first-search: AdjacencyList', () => {
   const graph = new AdjacencyList(8);
 
   graph.addEdge(0, 1);
@@ -27,7 +27,7 @@ test(`breadth-first-search: ${name}`, () => {
   expect(sequence).toEqual([ 0, 2, 1, 3, 4, 5, 6, 7 ]);
 });
 
-test(`depth-first-search: ${name}`, () => {
+test('depth-first-search: AdjacencyList', () => {
   const graph = new AdjacencyList(8);
 
   graph.addEdge(0, 1);

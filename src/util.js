@@ -82,3 +82,11 @@ export const shuffleArray = (array) => {
   }
   return array;
 };
+
+export const listToArray = (list) => {
+  const array = new Array(list.getSize());
+  for (let i = 0; i < list.getSize(); i++) {
+    array[i] = list.get(i);
+  }
+  return array;
+};

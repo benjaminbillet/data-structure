@@ -1,27 +1,14 @@
 /*
-A graph is a set of nodes connected by a set of edges.
-It is a generalization of trees where each node can have zero or more parents (called predecessors)
-and zero or more childs (called predecessors).
-Nodes with no predecessors are called sources, nodes with no successors are called sinks.
-
-The simplest way to represent a graph is an adjacency matrix, a matrix of booleans indicating if a node is connected to another.
-Note: the matrix can also represents weights on edges, by replacing the booleans by integers.
-
-An adjacency matrix has a space complexity of O(n²).
-
-LINKS
-https://en.wikipedia.org/wiki/Adjacency_matrix#Directed_graphs
-https://www.tutorialspoint.com/graph_theory/index.htm
-https://opendatastructures.org/versions/edition-0.1g/ods-java/12_1_AdjacencyMatrix_Repres.html
+An adjacency matrix that supports weighted edges
 */
 
 import DynamicArray from '../01-dynamic-array/dynamic-array';
 
 
-export default class AdjacencyMatrix {
+export default class WeightedAdjacencyMatrix {
   constructor(nbNodes = 32) {
     this.matrix = new Array(nbNodes * nbNodes);  // initialize the matrix
-    this.matrix.fill(false);
+    this.matrix.fill(null);
     this.nbNodes = nbNodes;
 
     // note: this implementation has a fixed number of nodes, but we could use a dynamic array
@@ -32,23 +19,27 @@ export default class AdjacencyMatrix {
 
   // set an edge between two nodes
   // O(1)
-  addEdge(node1, node2) {
+  addEdge(node1, node2, weight = 1) {
     // we go to the node1-th row and move node2 cells
-    this.matrix[node1 * this.nbNodes + node2] = true;
+    this.matrix[node1 * this.nbNodes + node2] = weight;
   }
 
   // remove an edge between two nodes
   // O(1)
   removeEdge(node1, node2) {
     // we go to the node1-th row and move node2 cells
-    this.matrix[node1 * this.nbNodes + node2] = false;
+    this.matrix[node1 * this.nbNodes + node2] = null;
   }
 
   // check if an edge exists between two nodes
   // O(1)
   hasEdge(node1, node2) {
     // we go to the node1-th row and move node2 cells
-    return this.matrix[node1 * this.nbNodes + node2] === true;
+    return this.matrix[node1 * this.nbNodes + node2] != null;
+  }
+
+  getEdgeWeight(node1, node2) {
+    return this.matrix[node1 * this.nbNodes + node2];
   }
 
   // get the list of successors of a node

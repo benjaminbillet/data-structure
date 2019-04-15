@@ -7,6 +7,8 @@ The degree of a node represents the number of connections to this node. In a dir
 
 The (in-/out-)degree of the graph is the maximum degree of each node.
 
+Note: the successor lists can contains pairs <weight,node> in order to represent weight on edges.
+
 LINKS
 https://opendatastructures.org/versions/edition-0.1g/ods-java/12_1_AdjacencyMatrix_Repres.html
 */
@@ -23,14 +25,15 @@ export default class AdjacencyList {
   }
 
   // set an edge between two nodeswe only have to browse the set of nodes once)
-  // O(1)
+  // O(1) with this implementation (allow duplication)
+  // O(n) if we want to check for duplicates, but can O(1) if we use hashtables instead of lists
   addEdge(node1, node2) {
     let list = this.lists[node1];
 
     // we create the list lazily
     if (list == null) {
       list = new DynamicArray(4);
-      this.lists[node1] = list; // /!\ this is sensitive to duplicates, we could use a set instead
+      this.lists[node1] = list; // /!\ this is sensitive to duplicates
     }
 
     return list.add(list.getSize(), node2);
